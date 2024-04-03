@@ -1,0 +1,362 @@
+C:\Users\Aamar\AppData\Local\Programs\Python\Python311\python.exe C:\Users\Aamar\Documents\MATLAB\CNNLSTMTF2\save.py 
+2024-04-01 16:14:03.807267: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-04-01 16:14:05.707740: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-04-01 16:14:09.832785: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+layerName: batchnorm_1_
+    numVars: 4
+    layerIdx= 3
+    varName: ['beta']
+        shp: [20]
+        weightNum: 1
+    varName: ['gamma']
+        shp: [20]
+        weightNum: 0
+    varName: ['moving_mean']
+        shp: [20]
+        weightNum: 2
+    varName: ['moving_variance']
+        shp: [20]
+        weightNum: 3
+Copying variable of shape:
+(20,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(20,), dtype=float32, path=batchnorm_1_/gamma>
+Copying variable of shape:
+(20,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(20,), dtype=float32, path=batchnorm_1_/beta>
+Copying variable of shape:
+(20,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(20,), dtype=float32, path=batchnorm_1_/moving_mean>
+Copying variable of shape:
+(20,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(20,), dtype=float32, path=batchnorm_1_/moving_variance>
+layerName: batchnorm_2_
+    numVars: 4
+    layerIdx= 7
+    varName: ['beta']
+        shp: [40]
+        weightNum: 1
+    varName: ['gamma']
+        shp: [40]
+        weightNum: 0
+    varName: ['moving_mean']
+        shp: [40]
+        weightNum: 2
+    varName: ['moving_variance']
+        shp: [40]
+        weightNum: 3
+Copying variable of shape:
+(40,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(40,), dtype=float32, path=batchnorm_2_/gamma>
+Copying variable of shape:
+(40,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(40,), dtype=float32, path=batchnorm_2_/beta>
+Copying variable of shape:
+(40,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(40,), dtype=float32, path=batchnorm_2_/moving_mean>
+Copying variable of shape:
+(40,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(40,), dtype=float32, path=batchnorm_2_/moving_variance>
+layerName: batchnorm_3_
+    numVars: 4
+    layerIdx= 11
+    varName: ['beta']
+        shp: [80]
+        weightNum: 1
+    varName: ['gamma']
+        shp: [80]
+        weightNum: 0
+    varName: ['moving_mean']
+        shp: [80]
+        weightNum: 2
+    varName: ['moving_variance']
+        shp: [80]
+        weightNum: 3
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_3_/gamma>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_3_/beta>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_3_/moving_mean>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_3_/moving_variance>
+layerName: batchnorm_4_
+    numVars: 4
+    layerIdx= 15
+    varName: ['beta']
+        shp: [80]
+        weightNum: 1
+    varName: ['gamma']
+        shp: [80]
+        weightNum: 0
+    varName: ['moving_mean']
+        shp: [80]
+        weightNum: 2
+    varName: ['moving_variance']
+        shp: [80]
+        weightNum: 3
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_4_/gamma>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_4_/beta>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_4_/moving_mean>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_4_/moving_variance>
+layerName: batchnorm_5_
+    numVars: 4
+    layerIdx= 18
+    varName: ['beta']
+        shp: [80]
+        weightNum: 1
+    varName: ['gamma']
+        shp: [80]
+        weightNum: 0
+    varName: ['moving_mean']
+        shp: [80]
+        weightNum: 2
+    varName: ['moving_variance']
+        shp: [80]
+        weightNum: 3
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_5_/gamma>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_5_/beta>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_5_/moving_mean>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=batchnorm_5_/moving_variance>
+layerName: conv_1_
+    numVars: 2
+    layerIdx= 2
+    varName: ['bias']
+        shp: [20]
+        weightNum: 1
+    varName: ['kernel']
+        shp: [3, 3, 1, 20]
+        weightNum: 0
+Copying variable of shape:
+(3, 3, 1, 20)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(3, 3, 1, 20), dtype=float32, path=conv_1_/kernel>
+Copying variable of shape:
+(20,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(20,), dtype=float32, path=conv_1_/bias>
+layerName: conv_2_
+    numVars: 2
+    layerIdx= 6
+    varName: ['bias']
+        shp: [40]
+        weightNum: 1
+    varName: ['kernel']
+        shp: [3, 3, 20, 40]
+        weightNum: 0
+Copying variable of shape:
+(3, 3, 20, 40)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(3, 3, 20, 40), dtype=float32, path=conv_2_/kernel>
+Copying variable of shape:
+(40,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(40,), dtype=float32, path=conv_2_/bias>
+layerName: conv_3_
+    numVars: 2
+    layerIdx= 10
+    varName: ['bias']
+        shp: [80]
+        weightNum: 1
+    varName: ['kernel']
+        shp: [3, 3, 40, 80]
+        weightNum: 0
+Copying variable of shape:
+(3, 3, 40, 80)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(3, 3, 40, 80), dtype=float32, path=conv_3_/kernel>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=conv_3_/bias>
+layerName: conv_4_
+    numVars: 2
+    layerIdx= 14
+    varName: ['bias']
+        shp: [80]
+        weightNum: 1
+    varName: ['kernel']
+        shp: [3, 3, 80, 80]
+        weightNum: 0
+Copying variable of shape:
+(3, 3, 80, 80)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(3, 3, 80, 80), dtype=float32, path=conv_4_/kernel>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=conv_4_/bias>
+layerName: conv_5_
+    numVars: 2
+    layerIdx= 17
+    varName: ['bias']
+        shp: [80]
+        weightNum: 1
+    varName: ['kernel']
+        shp: [3, 3, 80, 80]
+        weightNum: 0
+Copying variable of shape:
+(3, 3, 80, 80)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(3, 3, 80, 80), dtype=float32, path=conv_5_/kernel>
+Copying variable of shape:
+(80,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(80,), dtype=float32, path=conv_5_/bias>
+layerName: fc_1_
+    numVars: 2
+    layerIdx= 26
+    varName: ['bias']
+        shp: [12]
+        weightNum: 1
+    varName: ['kernel']
+        shp: [128, 12]
+        weightNum: 0
+Copying variable of shape:
+(128, 12)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(128, 12), dtype=float32, path=fc_1_/kernel>
+Copying variable of shape:
+(12,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(12,), dtype=float32, path=fc_1_/bias>
+layerName: fc_2_
+    numVars: 2
+    layerIdx= 29
+    varName: ['bias']
+        shp: [12]
+        weightNum: 1
+    varName: ['kernel']
+        shp: [12, 12]
+        weightNum: 0
+Copying variable of shape:
+(12, 12)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(12, 12), dtype=float32, path=fc_2_/kernel>
+Copying variable of shape:
+(12,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(12,), dtype=float32, path=fc_2_/bias>
+layerName: imageinput_
+    numVars: 2
+    layerIdx= 1
+    varName: ['mean']
+        shp: [98, 50, 1]
+        weightNum: 0
+    varName: ['variance']
+        shp: [98, 50, 1]
+        weightNum: 1
+Copying variable of shape:
+(98, 50, 1)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(98, 50, 1), dtype=float32, path=imageinput_/mean>
+Copying variable of shape:
+(98, 50, 1)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(98, 50, 1), dtype=float32, path=imageinput_/variance>
+layerName: lstm_
+    numVars: 3
+    layerIdx= 24
+    varName: ['bias']
+        shp: [512]
+        weightNum: 2
+    varName: ['kernel']
+        shp: [560, 512]
+        weightNum: 0
+    varName: ['recurrent_kernel']
+        shp: [128, 512]
+        weightNum: 1
+Copying variable of shape:
+(560, 512)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(560, 512), dtype=float32, path=lstm_/lstm_cell/kernel>
+Copying variable of shape:
+(128, 512)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(128, 512), dtype=float32, path=lstm_/lstm_cell/recurrent_kernel>
+Copying variable of shape:
+(512,)
+Assignment successful.
+Set variable value:
+<KerasVariable shape=(512,), dtype=float32, path=lstm_/lstm_cell/bias>
+WARNING:absl:You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+
+Process finished with exit code 0

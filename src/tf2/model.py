@@ -1,0 +1,46 @@
+from tensorflow import keras
+from tensorflow.keras import layers
+
+def create_model():
+    imageinput_unnormalized = keras.Input(shape=(98,50,1), name="imageinput_unnormalized")
+    imageinput = keras.layers.Normalization(axis=(1,2,3), name="imageinput_")(imageinput_unnormalized)
+    conv_1_prepadded = layers.ZeroPadding2D(padding=((1,1),(1,1)))(imageinput)
+    conv_1 = layers.Conv2D(11, (3,3), name="conv_1_")(conv_1_prepadded)
+    batchnorm_1 = layers.BatchNormalization(epsilon=0.000010, name="batchnorm_1_")(conv_1)
+    relu_1 = layers.ReLU()(batchnorm_1)
+    maxpool_1 = layers.MaxPool2D(pool_size=(3,3), strides=(2,2), padding="same")(relu_1)
+    conv_2_prepadded = layers.ZeroPadding2D(padding=((1,1),(1,1)))(maxpool_1)
+    conv_2 = layers.Conv2D(18, (3,3), name="conv_2_")(conv_2_prepadded)
+    batchnorm_2 = layers.BatchNormalization(epsilon=0.000010, name="batchnorm_2_")(conv_2)
+    relu_2 = layers.ReLU()(batchnorm_2)
+    maxpool_2 = layers.MaxPool2D(pool_size=(3,3), strides=(2,2), padding="same")(relu_2)
+    conv_3_prepadded = layers.ZeroPadding2D(padding=((1,1),(1,1)))(maxpool_2)
+    conv_3 = layers.Conv2D(31, (3,3), name="conv_3_")(conv_3_prepadded)
+    batchnorm_3 = layers.BatchNormalization(epsilon=0.000010, name="batchnorm_3_")(conv_3)
+    relu_3 = layers.ReLU()(batchnorm_3)
+    maxpool_3 = layers.MaxPool2D(pool_size=(3,3), strides=(2,2), padding="same")(relu_3)
+    conv_4_prepadded = layers.ZeroPadding2D(padding=((1,1),(1,1)))(maxpool_3)
+    conv_4 = layers.Conv2D(32, (3,3), name="conv_4_")(conv_4_prepadded)
+    batchnorm_4 = layers.BatchNormalization(epsilon=0.000010, name="batchnorm_4_")(conv_4)
+    relu_4 = layers.ReLU()(batchnorm_4)
+    conv_5_prepadded = layers.ZeroPadding2D(padding=((1,1),(1,1)))(relu_4)
+    conv_5 = layers.Conv2D(80, (3,3), name="conv_5_")(conv_5_prepadded)
+    batchnorm_5 = layers.BatchNormalization(epsilon=0.000010, name="batchnorm_5_")(conv_5)
+    relu_5 = layers.ReLU()(batchnorm_5)
+    maxpool_4 = layers.MaxPool2D(pool_size=(13,1), strides=(1,1))(relu_5)
+    maxpool_4perm = layers.Permute((3,2,1))(maxpool_4)
+    flatten = layers.Flatten()(maxpool_4perm)
+    flatten_lstm_input = flatten
+    flatten_lstm_input = layers.Reshape((1,-1))(flatten_lstm_input)
+    lstm = layers.LSTM(128, name='lstm_', activation='tanh', recurrent_activation='sigmoid', return_sequences=True, return_state=False)(flatten_lstm_input)
+    lstm = layers.Reshape((-1,))(lstm)
+    fc_1 = layers.Dense(12, name="fc_1_")(lstm)
+    relu_6 = layers.ReLU()(fc_1)
+    dropout = layers.Dropout(0.200000)(relu_6)
+    fc_2 = layers.Dense(12, name="fc_2_")(dropout)
+    relu_7 = layers.ReLU()(fc_2)
+    softmax = layers.Softmax()(relu_7)
+    classoutput = softmax
+
+    model = keras.Model(inputs=[imageinput_unnormalized], outputs=[classoutput])
+    return model
