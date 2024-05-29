@@ -5,10 +5,11 @@ import queue
 import librosa
 import onnxruntime
 import tkinter as tk
+from tkinter import ttk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 # Load the ONNX model
-onnx_model_path = r"C:\Users\amar\Desktop\Project\src\onnx\quanetPrunedCNNLSTMONNX"
+onnx_model_path = r"C:\Users\Aamar\Desktop\Project\src\onnx\quanetPrunedCNNLSTMONNX"
 ort_session = onnxruntime.InferenceSession(onnx_model_path)
 class_labels = ["background", "down", "go", "left", "no", "off", "on", "right", "stop", "up", "yes", "unknown"]
 
@@ -64,28 +65,62 @@ class AudioStream:
         self.plotdata = np.zeros(self.blocksize)
         self.root = tk.Tk()
         self.root.title("Audio Streaming")
+
+        # Set up styles
+        self.style = ttk.Style(self.root)
+        self.style.configure('TFrame', background='#FFFFFF')
+        self.style.configure('TLabel', background='#FFFFFF', foreground='black', font=('Helvetica', 12))
+        self.style.configure('TScale', background='#FFFFFF')
+        self.style.configure('TLabelframe', background='#FFFFFF', foreground='black', font=('Helvetica', 14, 'bold'))
+        self.style.configure('TLabelframe.Label', background='#FFFFFF', foreground='black')
+
+        self.main_frame = ttk.Frame(self.root, padding="10")
+        self.main_frame.pack(expand=True, fill=tk.BOTH)
+
         self.fig, self.ax = plt.subplots()
-        self.line, = self.ax.plot(np.zeros(self.blocksize))
+        self.line, = self.ax.plot(np.zeros(self.blocksize), color='#0078D7')
         self.ax.axis((0, self.blocksize, -1, 1))
         self.ax.set_yticks(np.linspace(-1, 1, num=5))
-        self.ax.yaxis.grid(True)
-        self.running = True
-        self.confidence_threshold = 0.5
-        self.amplitude_threshold = 0.3
+        self.ax.yaxis.grid(True, color='gray', linestyle='dashed')
+        self.ax.xaxis.grid(False)
+        self.fig.patch.set_facecolor('#FFFFFF')
+        self.ax.set_facecolor('#FFFFFF')
+        self.ax.spines['bottom'].set_color('black')
+        self.ax.spines['top'].set_color('black')
+        self.ax.spines['left'].set_color('black')
+        self.ax.spines['right'].set_color('black')
+        self.ax.tick_params(axis='x', colors='black')
+        self.ax.tick_params(axis='y', colors='black')
 
-        self.threshold_label = tk.Label(self.root, text="Confidence Threshold:")
-        self.threshold_label.pack()
-        self.threshold_slider = tk.Scale(self.root, from_=0, to=1, orient=tk.HORIZONTAL, resolution=0.01, command=self.update_threshold)
+        self.control_frame = ttk.Labelframe(self.main_frame, text="Controls", padding="10")
+        self.control_frame.pack(side=tk.TOP, fill=tk.X, pady=10)
+
+        self.threshold_label = ttk.Label(self.control_frame, text="Confidence Threshold:")
+        self.threshold_label.pack(side=tk.LEFT, padx=(0, 10))
+        self.threshold_value_label = ttk.Label(self.control_frame, text="0.50")
+        self.threshold_value_label.pack(side=tk.LEFT, padx=(5, 10))
+        self.threshold_slider = ttk.Scale(self.control_frame, from_=0, to=1, orient=tk.HORIZONTAL, command=self.update_threshold)
         self.threshold_slider.set(0.5)
-        self.threshold_slider.pack()
+        self.threshold_slider.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
-        self.amplitude_label = tk.Label(self.root, text="Amplitude Threshold:")
-        self.amplitude_label.pack()
-        self.amplitude_slider = tk.Scale(self.root, from_=0, to=1, orient=tk.HORIZONTAL, resolution=0.01, command=self.update_amplitude)
+        self.amplitude_label = ttk.Label(self.control_frame, text="Amplitude Threshold:")
+        self.amplitude_label.pack(side=tk.LEFT, padx=(20, 10))
+        self.amplitude_value_label = ttk.Label(self.control_frame, text="0.30")
+        self.amplitude_value_label.pack(side=tk.LEFT, padx=(5, 10))
+        self.amplitude_slider = ttk.Scale(self.control_frame, from_=0, to=1, orient=tk.HORIZONTAL, command=self.update_amplitude)
         self.amplitude_slider.set(0.3)
-        self.amplitude_slider.pack()
+        self.amplitude_slider.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
-        self.canvas = FigureCanvasTkAgg(self.fig, master=self.root)
+        self.prediction_frame = ttk.Labelframe(self.main_frame, text="Predictions", padding="10")
+        self.prediction_frame.pack(side=tk.TOP, fill=tk.X, pady=10)
+
+        self.prediction_label = ttk.Label(self.prediction_frame, text="Predicted Class: None")
+        self.prediction_label.pack(side=tk.TOP, pady=(0, 5))
+
+        self.prediction_array_label = ttk.Label(self.prediction_frame, text="Prediction Array: []")
+        self.prediction_array_label.pack(side=tk.TOP, pady=(0, 10))
+
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self.main_frame)
         self.canvas.get_tk_widget().pack(expand=tk.YES, fill=tk.BOTH)
         self.canvas.draw()
 
@@ -102,24 +137,27 @@ class AudioStream:
 
     def update_plot(self):
         """
-        Updates the real-time plot.
+        Updates the real-time plot and displays predictions.
         """
         if not self.q.empty():
             data = self.q.get()
             preprocessed_audio_data = preprocess_audio(data[:, 0])
             predictions = predict(ort_session, preprocessed_audio_data)
             print(predictions)
-            num_predictions = len(predictions)
-            if num_predictions > 0:
-                for i, prediction_list in enumerate(predictions):
-                    prediction = prediction_list[0]
-                    predicted_class_index = np.argmax(prediction)
-                    if predicted_class_index < len(class_labels):
-                        predicted_class_label = class_labels[predicted_class_index]
-                        confidence = prediction[predicted_class_index]
+            if predictions:
+                prediction = predictions[0][0]
+                predicted_class_index = np.argmax(prediction)
+                if predicted_class_index < len(class_labels):
+                    predicted_class_label = class_labels[predicted_class_index]
+                    confidence = prediction[predicted_class_index]
+                    prediction_text = f"Predicted Class: {predicted_class_label} (Confidence: {confidence:.2f})"
+                    prediction_array_text = f"Prediction Array: {prediction}"
 
-                        if predicted_class_label != "background" and confidence >= self.confidence_threshold:
-                            print("Predicted class:", predicted_class_label)
+                    self.prediction_label.config(text=prediction_text)
+                    self.prediction_array_label.config(text=prediction_array_text)
+
+                    if predicted_class_label != "background" and confidence >= self.confidence_threshold:
+                        print("Predicted class:", predicted_class_label)
 
             self.plotdata = np.roll(self.plotdata, -len(data))
             self.plotdata[-len(data):] = data[:, 0]
@@ -128,9 +166,11 @@ class AudioStream:
 
     def update_threshold(self, value):
         self.confidence_threshold = float(value)
+        self.threshold_value_label.config(text=f"{float(value):.2f}")
 
     def update_amplitude(self, value):
         self.amplitude_threshold = float(value)
+        self.amplitude_value_label.config(text=f"{float(value):.2f}")
 
     def start_stream(self):
         with sd.InputStream(samplerate=self.sample_rate, blocksize=self.blocksize, channels=1, callback=self.audio_callback):
